@@ -1,7 +1,6 @@
 from function_calling_usage import function_calling_usage
 
 def grade_response_with_llm(user_prompt, assistant_response):
-    # call function_calling_usage to get the response
     structured_grading_prompt = f"""
     You are a helpful assistant that can grade the response of a user.
     You will be given a response and will grade it based on the criteria provided.
@@ -10,7 +9,6 @@ def grade_response_with_llm(user_prompt, assistant_response):
     ### user prompt: {user_prompt}
     ### assistant response: {assistant_response}
     """
-    # call function_calling_usage to get the response
     response = function_calling_usage(structured_grading_prompt)
     return response
 
