@@ -71,6 +71,6 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 
 ## Acknowledgements
 
-- OpenAI for their powerful language models
+- OpenAI for their library
 - Groq for their API services
 - The open-source community for various libraries and tools used in this project
