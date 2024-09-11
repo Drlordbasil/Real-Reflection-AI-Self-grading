@@ -32,5 +32,60 @@
                 "required": ["url"]
             }
         }
+    },
+    {
+        "type": "function",
+        "function": {
+            "name": "analyze_and_improve_code",
+            "description": "Analyze and improve Python code",
+            "parameters": {
+                "type": "object",
+                "properties": {
+                    "code": {
+                        "type": "string",
+                        "description": "The Python code to analyze and improve"
+                    }
+                },
+                "required": ["code"]
+            }
+        }
+    },
+    {
+        "type": "function",
+        "function": {
+            "name": "test_code",
+            "description": "Test Python code and provide results",
+            "parameters": {
+                "type": "object",
+                "properties": {
+                    "code": {
+                        "type": "string",
+                        "description": "The Python code to test"
+                    }
+                },
+                "required": ["code"]
+            }
+        }
+    },
+    {
+        "type": "function",
+        "function": {
+            "name": "debug_code",
+            "description": "Debug Python code given an error message",
+            "parameters": {
+                "type": "object",
+                "properties": {
+                    "code": {
+                        "type": "string",
+                        "description": "The Python code to debug"
+                    },
+                    "error_message": {
+                        "type": "string",
+                        "description": "The error message produced by the code"
+                    }
+                },
+                "required": ["code", "error_message"]
+            }
+        }
     }
 ]

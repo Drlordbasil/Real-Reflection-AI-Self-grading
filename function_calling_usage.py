@@ -3,12 +3,14 @@ from config import Config
 from image_vision_usage import generate_image_vision_text
 from google_search_return_urls import google_search
 from website_scraper import WebsiteScraper
+from autogen_code_handler import AutogenCodeHandler
 import json
 import logging
 
 logging.basicConfig(level=logging.INFO, format='%(asctime)s - %(levelname)s - %(message)s')
 
 client = load_client()
+autogen_handler = AutogenCodeHandler()
 
 def function_calling_usage(user_prompt):
     with open('tools_functions.json', 'r') as f:
@@ -40,6 +42,15 @@ def function_calling_usage(user_prompt):
                         return f"Content from {function_args['url']}: {content}"
                     else:
                         return f"Failed to scrape content from {function_args['url']}"
+                elif function_name == "analyze_and_improve_code":
+                    analysis = autogen_handler.analyze_and_improve_code(function_args["code"])
+                    return f"Code analysis and improvement suggestions:\n{analysis}"
+                elif function_name == "test_code":
+                    test_results = autogen_handler.test_code(function_args["code"])
+                    return f"Code test results:\n{test_results}"
+                elif function_name == "debug_code":
+                    debug_result = autogen_handler.debug_code(function_args["code"], function_args["error_message"])
+                    return f"Code debugging results:\n{debug_result}"
                 else:
                     return f"Unknown function: {function_name}"
         else:

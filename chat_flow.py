@@ -32,7 +32,7 @@ class ChatFlow:
         self.add_message({"role": "assistant", "content": vision_text})
         return vision_text
 # # # test the chat flow
-# chat_flow = ChatFlow()
-# print(chat_flow.chat("What are the latest models on huggingface? describe each of them to me in detail"))
+chat_flow = ChatFlow()
+print(chat_flow.chat("test a snake game you create."))
 
 
