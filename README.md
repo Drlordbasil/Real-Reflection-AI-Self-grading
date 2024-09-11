@@ -51,6 +51,9 @@ Real Reflection AI Self-grading is an innovative project that leverages advanced
 2. Generate and refine ideas:
    ```
    python generate_idea.py
+   ```
+   ```
+   python generate_idea.py outputs:
    Idea eval and idea gen:
    Idea:
    **Improved Idea:**
@@ -67,7 +70,7 @@ Real Reflection AI Self-grading is an innovative project that leverages advanced
    4. Create a novel tokenomics system, where UBI Coin is minted and distributed to users based on their contribution to the network.
    
    **Modified Code Structure:**
-   ```python
+   1```python
    import tkinter as tk
    from tkinter import ttk
    import requests
@@ -189,7 +192,7 @@ Real Reflection AI Self-grading is an innovative project that leverages advanced
    Sentiment: 0.12
    ``` 
 
-3. To use the chatbot in your own application, import the `ChatFlow` class from `chat_flow.py`:
+4. To use the chatbot in your own application, import the `ChatFlow` class from `chat_flow.py`:
    ```python
    from chat_flow import ChatFlow
    
