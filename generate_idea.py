@@ -1,4 +1,6 @@
 import re
+import os
+import time
 from textblob import TextBlob
 from chat_flow import ChatFlow
 
@@ -96,6 +98,31 @@ def generate_python_prototype(chat_flow, idea):
     prototype = chat_flow.chat(prompt)
     return prototype
 
+def save_idea(idea, evaluation, score, sentiment, iteration, folder="generated_ideas"):
+    if not os.path.exists(folder):
+        os.makedirs(folder)
+    
+    filename = f"{folder}/idea_{iteration:03d}_score_{score:.2f}.txt"
+    try:
+        with open(filename, "w", encoding="utf-8") as f:
+            f.write(f"Idea:\n{idea}\n\nEvaluation:\n{evaluation}\n\nOverall Score: {score:.2f}\nSentiment: {sentiment:.2f}")
+    except Exception as e:
+        print(f"Error saving idea to file: {e}")
+
+def api_call_with_backoff(func, *args, max_retries=5, initial_delay=1):
+    delay = initial_delay
+    for attempt in range(max_retries):
+        try:
+            return func(*args)
+        except Exception as e:
+            if "rate_limit_exceeded" in str(e):
+                print(f"Rate limit exceeded. Retrying in {delay} seconds...")
+                time.sleep(delay)
+                delay *= 2
+            else:
+                raise e
+    raise Exception(f"Max retries ({max_retries}) exceeded for API call")
+
 def gen_idea_loop():
     chat_flow = ChatFlow()
     ideas_generated = 0
@@ -103,50 +130,63 @@ def gen_idea_loop():
     best_score = 0
     max_iterations = 20
     refinement_threshold = 7.5
+    excellent_idea_threshold = 8.0
 
     while ideas_generated < max_iterations:
         ideas_generated += 1
         
-        if ideas_generated == 1 or best_score < refinement_threshold:
-            prompt = f"""Generate an innovative idea for a Universal Basic Income (UBI) temporary solution that meets the following constraints:
+        try:
+            if ideas_generated == 1 or best_score < refinement_threshold:
+                prompt = f"""Generate an innovative idea for a Universal Basic Income (UBI) temporary solution that meets the following constraints:
 
-            {CONSTRAINTS}
+                {CONSTRAINTS}
 
-            The idea should leverage technology, particularly Python, to create a solution that can help people generate basic income without requiring initial capital or resources. Focus on digital solutions that can be easily distributed and scaled.
-            """
-            idea = chat_flow.chat(prompt)
-            print(f"\nGenerated idea {ideas_generated}:\n{idea}")
-        else:
-            improvement_suggestions = extract_improvement_suggestions(evaluate_idea(chat_flow, best_idea))
-            idea = refine_idea(chat_flow, best_idea, improvement_suggestions)
-            print(f"\nRefined idea {ideas_generated}:\n{idea}")
+                The idea should leverage technology, particularly Python, to create a solution that can help people generate basic income without requiring initial capital or resources. Focus on digital solutions that can be easily distributed and scaled.
+                """
+                idea = api_call_with_backoff(chat_flow.chat, prompt)
+                print(f"\nGenerated idea {ideas_generated}:\n{idea}")
+            else:
+                improvement_suggestions = extract_improvement_suggestions(evaluate_idea(chat_flow, best_idea))
+                idea = api_call_with_backoff(refine_idea, chat_flow, best_idea, improvement_suggestions)
+                print(f"\nRefined idea {ideas_generated}:\n{idea}")
 
-        sentiment = analyze_sentiment(idea)
-        print(f"Sentiment score: {sentiment:.2f}")
+            sentiment = analyze_sentiment(idea)
+            print(f"Sentiment score: {sentiment:.2f}")
 
-        evaluation = evaluate_idea(chat_flow, idea)
-        print(f"Idea evaluation:\n{evaluation}")
+            evaluation = api_call_with_backoff(evaluate_idea, chat_flow, idea)
+            print(f"Idea evaluation:\n{evaluation}")
 
-        overall_score = extract_overall_score(evaluation)
-        
-        if overall_score > best_score:
-            best_idea = idea
-            best_score = overall_score
-            print(f"New best idea! Score: {best_score:.2f}")
+            overall_score = extract_overall_score(evaluation)
+            
+            save_idea(idea, evaluation, overall_score, sentiment, ideas_generated)
 
-        if overall_score >= 8.5 and sentiment > 0.6:
-            print(f"Excellent idea found after {ideas_generated} iterations!")
-            break
+            if overall_score > best_score:
+                best_idea = idea
+                best_score = overall_score
+                print(f"New best idea! Score: {best_score:.2f}")
+
+            if overall_score >= excellent_idea_threshold and sentiment > 0.5:
+                print(f"Excellent idea found after {ideas_generated} iterations!")
+                break
+
+        except Exception as e:
+            print(f"Error occurred during iteration {ideas_generated}: {e}")
+            continue
 
     print(f"\nBest idea found after {ideas_generated} iterations:")
     print(best_idea)
     print(f"Best idea score: {best_score:.2f}")
 
-    # Generate Python prototype for the best idea
-    print("\nGenerating Python prototype for the best idea...")
-    prototype = generate_python_prototype(chat_flow, best_idea)
-    print("\nPython Prototype:")
-    print(prototype)
+    try:
+        print("\nGenerating Python prototype for the best idea...")
+        prototype = api_call_with_backoff(generate_python_prototype, chat_flow, best_idea)
+        print("\nPython Prototype:")
+        print(prototype)
+
+        with open("generated_ideas/best_idea_prototype.py", "w", encoding="utf-8") as f:
+            f.write(prototype)
+    except Exception as e:
+        print(f"Error generating or saving prototype: {e}")
 
 if __name__ == "__main__":
     gen_idea_loop()
