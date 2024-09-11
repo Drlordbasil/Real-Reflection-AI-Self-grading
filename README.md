@@ -51,48 +51,142 @@ Real Reflection AI Self-grading is an innovative project that leverages advanced
 2. Generate and refine ideas:
    ```
    python generate_idea.py
-   Idea eval:
-   Idea evaluation:
-   Novelty: 6
-   The idea of using Wikipedia's content on climate modeling to evaluate the concept is not novel, but the context of using it for social entrepreneurship is somewhat unique.
+   Idea eval and idea gen:
+   Idea:
+   **Improved Idea:**
+   
+   Create a decentralized, open-source, and autonomous Python application that rewards users for contributing their idle computing resources to scientific research projects, data analysis, and machine learning tasks. The application will utilize a novel tokenomics system, leveraging the Proof of Participation (PoP) consensus algorithm to mint and distribute a unique cryptocurrency, called "UBI Coin," to users who contribute their computing resources.
+   
+   **Solution:**
+   
+   This idea leverages the concept of distributed computing, where users contribute their idle computing resources to a network, solving complex problems or performing tasks in the background. The application would:
+   
+   1. Utilize the BOINC (Berkeley Open Infrastructure for Network Computing) framework, an open-source platform that allows users to volunteer their computing resources to various scientific projects.
+   2. Implement the Proof of Participation (PoP) consensus algorithm, which rewards users for contributing their computing resources to the network.
+   3. Develop a user-friendly interface using Python libraries like Tkinter or PyQt, enabling users to easily install, configure, and run the application.
+   4. Create a novel tokenomics system, where UBI Coin is minted and distributed to users based on their contribution to the network.
+   
+   **Modified Code Structure:**
+   ```python
+   import tkinter as tk
+   from tkinter import ttk
+   import requests
+   import json
+   from boinc import boinc
+   from pop import PoP
+   
+   class UBI_Application:
+       def __init__(self, root):
+           self.root = root
+           self.root.title("UBI Application")
+   
+           # Initialize BOINC client
+           self.boinc_client = boinc.BoincClient()
+   
+           # Initialize PoP client
+           self.pop_client = PoP()
+   
+           # Create GUI elements
+           self.create_widgets()
+   
+       def create_widgets(self):
+           # Create start/stop button
+           self.start_button = ttk.Button(self.root, text="Start", command=self.start_boinc)
+           self.start_button.pack()
+   
+           # Create status label
+           self.status_label = ttk.Label(self.root, text="Idle")
+           self.status_label.pack()
+   
+       def start_boinc(self):
+           # Start BOINC client
+           self.boinc_client.start()
+   
+           # Schedule tasks using BOINC's RPC interface
+           self.boinc_client.rpc('schedule_tasks', [])
+   
+           # Initialize PoP client and start minting UBI Coin
+           self.pop_client.start()
+   
+       def monitor_progress(self):
+           # Periodically check BOINC client's progress
+           progress = self.boinc_client.rpc('get_progress', [])
+   
+           # Update PoP client with progress
+           self.pop_client.update(progress)
+   
+   if __name__ == "__main__":
+       root = tk.Tk()
+       app = UBI_Application(root)
+       root.mainloop()
+   ```
+   This modified code creates a basic GUI application that starts the BOINC client and schedules tasks. It then initializes the PoP client and starts minting UBI Coin based on the user's contribution to the network.
+   
+   **Additional Functionality:**
+   
+   To further improve the solution, the application can include additional features, such as:
+   
+   * A decentralized market for UBI Coin, allowing users to exchange their tokens for goods and services.
+   * A system for staking UBI Coin, enabling users to earn interest on their tokens.
+   * A mechanism for voting on proposals for the development of the UBI Coin ecosystem.
+   
+   **Tokenomics:**
+   
+   The UBI Coin tokenomics system will be designed to incentivize users to contribute their computing resources to the network. The system will include the following features:
+   
+   * Token supply: 10 billion UBI Coins will be minted initially, with a annual inflation rate of 2%.
+   * Token distribution: 50% of the tokens will be distributed to users based on their contribution to the network, 20% will be allocated to the development team, and 30% will be reserved for future development and partnerships.
+   * Token velocity: The token velocity will be designed to encourage users to hold their tokens for the long term, rather than selling them immediately.
+   
+   **Scalability:**
+   
+   As the number of users increases, the application's scalability is ensured through the decentralized BOINC framework, which can handle a large number of computing resources. Additionally, the use of the PoP consensus algorithm allows for a high level of security and decentralization, ensuring that the network remains secure and resilient.
+   
+   **Conclusion:**
+   
+   This improved idea leverages Python, BOINC, and the Proof of Participation consensus algorithm to create a UBI temporary solution that meets the constraints. The application rewards users for contributing their idle computing resources, providing a basic income without requiring initial capital or resources. The novel tokenomics system and the use of the PoP consensus algorithm ensure a high level of security, decentralization, and scalability, making this solution suitable for a large-scale deployment.
+   
+   Evaluation:
+   Novelty: 8
+   The idea of leveraging idle computing resources to generate a Universal Basic Income (UBI) is innovative, and the use of the Proof of Participation (PoP) consensus algorithm and the BOINC framework adds a unique twist.
    
    Feasibility: 7
-   The idea is feasible as it does not require any specific skills or resources, but it relies on the availability of accurate information on Wikipedia.
+   The idea is technically feasible, but implementing the PoP consensus algorithm, creating a user-friendly interface, and developing a tokenomics system can be challenging. Additionally, the BOINC framework has limitations in terms of scalability and decentralization.
    
-   Scalability: 5
-   The idea has limited scalability as it relies on a single source of information and may not be able to accommodate a large number of users.
+   Scalability: 6
+   While the BOINC framework can handle a large number of computing resources, it may face scalability issues as the number of users grows. Furthermore, the PoP consensus algorithm's ability to handle high transaction volumes is uncertain.
    
-   Social impact: 8
-   The idea has the potential to create a significant social impact by providing accurate information on climate modeling and its implications.
+   Social impact: 9
+   If successful, this idea can have a significant social impact by providing a basic income to individuals in need, without relying on initial capital or resources. It also promotes decentralized and secure computing, which can contribute to the well-being of many communities.
    
-   Sustainability: 6
-   The idea is sustainable as it relies on a publicly available source of information and does not require any specific resources.
+   Sustainability: 8
+   The idea is sustainable in the long term, as it leverages existing computing resources and incentivizes users to contribute their idle resources. However, the tokenomics system may require continued development and growth to maintain its value and momentum.
    
    Accessibility: 8
-   The idea is highly accessible as it can be accessed by anyone with an internet connection.
+   The idea is accessible to individuals with basic computer skills, but setting up the required software and hardware might be challenging for those without prior experience.
    
    Constraint compliance: 9
-   The idea meets all the constraints as it is created in Python code, does not use credentials, is free to start, and does not rely on selling or trading.
+   The idea meets most of the constraints, including being a UBI temporary solution, created in Python, runnable on any PC, and no requirement for credentials, initial capital, or resources. However, the cost and feasibility of creating a new decentralized market or staking mechanism may be uncertain.
    
-   Overall score: 6.9
+   Overall score: 7.6
    
    Strengths:
-   
-   1. High accessibility: The idea can be accessed by anyone with an internet connection, making it highly accessible.
-   2. High social impact: The idea has the potential to create a significant social impact by providing accurate information on climate modeling and its implications.
-   3. Compliance with constraints: The idea meets all the constraints, making it a viable solution.
+   1. Unique approach to generating UBI using idle computing resources
+   2. Potential for high social impact and promoting decentralized, secure computing
+   3. Novel tokenomics system leveraging PoP consensus algorithm
    
    Weaknesses:
-   
-   1. Limited scalability: The idea has limited scalability as it relies on a single source of information and may not be able to accommodate a large number of users.
-   2. Limited novelty: The idea is not highly novel, but the context of using it for social entrepreneurship is somewhat unique.
-   3. Relying on a single source of information: The idea relies on Wikipedia as the sole source of information, which may not be comprehensive or accurate.
+   1. Dependence on BOINC framework's scalability and decentralization
+   2. High technical difficulty in implementing PoP consensus algorithm and tokenomics system
+   3. Uncertainty in high transaction volumes' impact on the network
    
    Improvement suggestions:
+   1. Collaborate with existing BOINC projects or adapt them to improve decentralization and scalability.
+   2. Develop and integrate decentralized solutions for market and staking mechanisms to increase tokenomics' feasibility and long-term momentum.
+   3. Establish strategic partnerships to promote the UBI application, develop new tokenomics, or expand its scope and reach.
    
-   1. Diversify sources of information: To improve the idea, consider diversifying the sources of information to include other credible sources, such as academic journals or government reports.
-   2. Develop a more interactive platform: To increase scalability and engagement, consider developing a more interactive platform that allows users to engage with the information in different ways, such as through quizzes or games.
-   3. Develop a feedback mechanism: To improve the accuracy and comprehensiveness of the information, consider developing a feedback mechanism that allows users to provide feedback and suggestions for improvement.  
+   Overall Score: 7.60
+   Sentiment: 0.12
    ``` 
 
 3. To use the chatbot in your own application, import the `ChatFlow` class from `chat_flow.py`:
