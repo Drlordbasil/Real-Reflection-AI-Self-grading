@@ -28,10 +28,7 @@ Real Reflection AI Self-grading is an innovative project that leverages advanced
 ## Setup
 
 1. Clone the repository:
-   ```
-   git clone https://github.com/yourusername/Real-Reflection-AI-Self-grading.git
-   cd Real-Reflection-AI-Self-grading
-   ```
+
 
 2. Install the required dependencies:
    ```
