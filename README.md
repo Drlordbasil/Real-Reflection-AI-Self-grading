@@ -119,7 +119,7 @@ Real Reflection AI Self-grading is an innovative project that leverages advanced
        root = tk.Tk()
        app = UBI_Application(root)
        root.mainloop()
-   ```
+   ```1
    This modified code creates a basic GUI application that starts the BOINC client and schedules tasks. It then initializes the PoP client and starts minting UBI Coin based on the user's contribution to the network.
    
    **Additional Functionality:**
