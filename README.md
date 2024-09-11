@@ -51,7 +51,49 @@ Real Reflection AI Self-grading is an innovative project that leverages advanced
 2. Generate and refine ideas:
    ```
    python generate_idea.py
-   ```
+   Idea eval:
+   Idea evaluation:
+   Novelty: 6
+   The idea of using Wikipedia's content on climate modeling to evaluate the concept is not novel, but the context of using it for social entrepreneurship is somewhat unique.
+   
+   Feasibility: 7
+   The idea is feasible as it does not require any specific skills or resources, but it relies on the availability of accurate information on Wikipedia.
+   
+   Scalability: 5
+   The idea has limited scalability as it relies on a single source of information and may not be able to accommodate a large number of users.
+   
+   Social impact: 8
+   The idea has the potential to create a significant social impact by providing accurate information on climate modeling and its implications.
+   
+   Sustainability: 6
+   The idea is sustainable as it relies on a publicly available source of information and does not require any specific resources.
+   
+   Accessibility: 8
+   The idea is highly accessible as it can be accessed by anyone with an internet connection.
+   
+   Constraint compliance: 9
+   The idea meets all the constraints as it is created in Python code, does not use credentials, is free to start, and does not rely on selling or trading.
+   
+   Overall score: 6.9
+   
+   Strengths:
+   
+   1. High accessibility: The idea can be accessed by anyone with an internet connection, making it highly accessible.
+   2. High social impact: The idea has the potential to create a significant social impact by providing accurate information on climate modeling and its implications.
+   3. Compliance with constraints: The idea meets all the constraints, making it a viable solution.
+   
+   Weaknesses:
+   
+   1. Limited scalability: The idea has limited scalability as it relies on a single source of information and may not be able to accommodate a large number of users.
+   2. Limited novelty: The idea is not highly novel, but the context of using it for social entrepreneurship is somewhat unique.
+   3. Relying on a single source of information: The idea relies on Wikipedia as the sole source of information, which may not be comprehensive or accurate.
+   
+   Improvement suggestions:
+   
+   1. Diversify sources of information: To improve the idea, consider diversifying the sources of information to include other credible sources, such as academic journals or government reports.
+   2. Develop a more interactive platform: To increase scalability and engagement, consider developing a more interactive platform that allows users to engage with the information in different ways, such as through quizzes or games.
+   3. Develop a feedback mechanism: To improve the accuracy and comprehensiveness of the information, consider developing a feedback mechanism that allows users to provide feedback and suggestions for improvement.  
+   ``` 
 
 3. To use the chatbot in your own application, import the `ChatFlow` class from `chat_flow.py`:
    ```python
